@@ -24,7 +24,7 @@ if (condition){
 ```
 Styling
 ---
-Bold uses '**' before and after like this **bold**
-Italics uses '*' before and after like this *italics*
-Code uses '`' before and after just inline like this `italics`
+Bold uses two asterisks before and after like this **bold**
+Italics uses one asterisk before and after like this *italics*
+Code uses a back quote before and after just inline like this `italics`
 

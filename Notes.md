@@ -19,6 +19,13 @@ git commit -m *file name*
 git push -u origin master (only used first time); the -u stands for upstream
 git push origin master (used for subsequent pushes)
 
+####Retrieve older versions
+
+git log (this will allow me to retrieve the key)
+
+git checkout {key} (working version becomes the version checked out)
+
+
 
 ####Check which remotes you have
 git remote
@@ -87,5 +94,114 @@ for ($a = 1; $a <= 5; $a++) {
     echo "\$a has a value of {$a}\n";
 }
 ```
+---
+13 May 14
 
+```fwrite(STDOUT, "What is your name? ");```
+
+and
+
+```echo "What is your name?\n";```
+
+are **equivalent**.
+
+On the input side...
+
+```$some_var= fgets(STDIN);```
+
+and
+
+```$some_var= fputs(STDIN);```
+
+are **equivalent**.
+
+####foreach loop
+
+```
+foreach (array_expression as $value) {
+    statement
+}
+
+```
+Sample (using *for loop*):
+
+```
+$todos = array('A','B','C');
+for ($i=0;$i < count($todos);$i++)
+{
+	$todo=$todos[$i];
+	echo $todo . PHP_EOL;
+}
+```
+
+Alternate Sample (using *foreac loop*):
+
+```
+foreach ($todos as $todo)
+{
+	echo $todo . PHP_EOL;
+}
+```
+####Looping through associative arrays
+
+```
+foreach (array_expression as $key => $value) {
+    statement
+}
+```
+
+Other tasks:
+
+**fruit.php** push to GitHub
+1. Create an array of fruits.  Write a loop that prints the fruits
+	-as a for loop 
+	-as a foreach loop
+1. Modify the fruit array so that the fruitname =>color
+	-print out using a foreach loop
+		Apples are red.
+		Bananas are yellow.
+		Oranges are orange.
+		Grapes are purple.
+		Kiwis are green.
+
+
+standard example of foreach with multidimensional array.
+
+```
+$books = array(
+    'The Hobbit' => array(
+        'published' => 1937,
+        'author' => 'J. R. R. Tolkien',
+        'pages' => 310
+    ),
+    'Game of Thrones' => array(
+        'published' => 1996,
+        'author' => 'George R. R. Martin',
+        'pages' => 835
+    ),
+    'The Catcher in the Rye' => array(
+        'published' => 1951,
+        'author' => 'J. D. Salinger',
+        'pages' => 220
+    ),
+    'A Tale of Two Cities' => array(
+        'published' => 1859,
+        'author' => 'Charles Dickens',
+        'pages' => 544
+    )
+);
+
+foreach ($books as $book => $properties) 
+{
+    if ((int)$properties['published'] > 1950) //check published date and only show after 1950
+    {
+        echo "Book title = {$book}\n"; 
+        foreach ($properties as $property => $value) 
+        {
+            echo "\t{$property} = {$value}\n";
+        }
+    echo "\n";
+    }
+}
+```
 

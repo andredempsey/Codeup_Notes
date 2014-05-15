@@ -163,8 +163,8 @@ Other tasks:
 		Oranges are orange.
 		Grapes are purple.
 		Kiwis are green.
-
-
+---
+14 May 14
 standard example of foreach with multidimensional array.
 
 ```
@@ -205,3 +205,120 @@ foreach ($books as $book => $properties)
 }
 ```
 
+**break** means exit the loop
+**continue** means skip over the current iteration
+
+break 2 will cause an exit from two levels of loops
+break 3 will cause an exit from three levels of loops
+
+Use the **switch** command in place of multiple **elseif** statements
+
+```
+$value = 'Hello!';
+
+switch (gettype($value)) {
+    case 'integer':
+        echo '$value is an integer';
+        break;
+    case 'float':
+        echo '$value is a float';
+        break;
+    case 'boolean':
+        echo '$value is a boolean';
+        break;
+    case 'array':
+        echo '$value is an array';
+        break;
+    case 'null':
+        echo '$value is null';
+        break;
+    case 'string':
+        echo '$value is a string';
+        break;
+}
+```
+use **default** at the end of the switch to snag items that don't meet any of the cases
+
+when working with dates; make sure you set the time zone as follows:
+```
+// Set the default timezone
+date_default_timezone_set('America/Chicago');
+```
+####To Do Assignment
+
+1. Fix the todo list to allow lowercase letters
+1. Fix the display to start with '1'
+
+sequence of commands to reorder an array and set first item to use an index of 1 instead of 0
+
+```
+unset($items[$key]);
+$items=array_values($items);
+array_unshift($items,"");
+unset($items[0]);
+```
+
+15 May 14
+####Functions
+```
+function name($arg_1, $arg_2, /* ..., */ $arg_n) 
+{
+    // code goes here
+}
+
+```
+if you want to set the default for a variable passed to a function (in case user doesn't pass a value), use the following format
+```
+function compare($a, $b, $strict=true)
+{
+
+}
+
+```
+
+Additional functions Ben recommended I look at...
+
+```
+Example #1 func_get_args() example
+
+<?php
+function foo()
+{
+    $numargs = func_num_args();
+    echo "Number of arguments: $numargs<br />\n";
+    if ($numargs >= 2) {
+        echo "Second argument is: " . func_get_arg(1) . "<br />\n";
+    }
+    $arg_list = func_get_args();
+    for ($i = 0; $i < $numargs; $i++) {
+        echo "Argument $i is: " . $arg_list[$i] . "<br />\n";
+    }
+}
+
+foo(1, 2, 3);
+?>
+
+```
+
+and another one
+```
+<?php
+function foobar($arg, $arg2) {
+    echo __FUNCTION__, " got $arg and $arg2\n";
+}
+class foo {
+    function bar($arg, $arg2) {
+        echo __METHOD__, " got $arg and $arg2\n";
+    }
+}
+
+
+// Call the foobar() function with 2 arguments
+call_user_func_array("foobar", array("one", "two"));
+
+// Call the $foo->bar() method with 2 arguments
+$foo = new foo;
+call_user_func_array(array($foo, "bar"), array("three", "four"));
+?>
+
+```

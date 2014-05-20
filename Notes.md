@@ -322,3 +322,101 @@ call_user_func_array(array($foo, "bar"), array("three", "four"));
 ?>
 
 ```
+16 May 14
+
+You can use sleep([delay]) to pause for a number of seconds.
+
+Two useful functions are:
+
+```isset()```
+
+always check if a variable is set before checking a condition
+for example:
+
+if(isset([$value]) && $value !='')
+
+and
+
+```empty()```
+
+caution:  '' and 0 and False will cause issues; use on strings
+
+
+####Challenge assignment
+<?php
+
+$hand = array('A-H', '5-D', 'K-C', 'A-S', '4-H');
+
+function getTotal($hand)
+{
+    $total = 0;
+
+    // loop through hand and calculate total value
+    // use "explode" function to separate card suit and value
+    // aces count as 11 unless you are over 21 and then they count as 1
+    // K, Q, and J count as 10
+    // numeric cards count as their value
+
+    foreach ($hand as $card)
+    {
+        var_dump(explode('-', $card));
+    }
+
+    return $total;
+}
+
+echo getTotal($hand) . PHP_EOL;
+
+####Sorting Arrays
+19 May 14
+
+sort([array]);  //sorts alphabetically
+rsort([array]);  //sorts reverse alphabetically
+
+
+The bitwise OR operator is | (single pipe)
+
+asort([array]);  //keeps associative array keys
+ksort([array]); //sorts by array keys
+
+
+//dzone
+//hackerzone
+//RSS
+//feedme
+
+review conditional statements that look like this
+
+```
+    if (array_search($searchstring,$targetarray)!== FALSE) 
+    {    
+     return true;
+    }
+    else
+    {
+     return false;
+    }
+```
+and look at replacing with the following (piece from within a function):
+
+
+return array_search($searchstring, $targetarray)!==false;
+
+####Add or removing items from beginning or end of an array
+array_shift(array); //removes from beginning and returns value removed
+array_unshift(array, var); //add to beginning
+array_push(array, var); //add to end
+array_pop(array); //removes from end and returns value removed
+
+####Cue vs Stack
+
+**Stack**
+Last in, First Out
+use array_push and array_pop
+
+
+**Cue**
+First in, First Output
+
+use array_push and array_shift()
+

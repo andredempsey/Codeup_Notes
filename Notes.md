@@ -420,3 +420,326 @@ First in, First Output
 
 use array_push and array_shift()
 
+####Including references to files
+
+$filename = 'file.txt';
+$handle =fopen($filename, 'r'); //first arg is the file and the second arg is action; for example the 'r' means 'read'
+don't open a file to write unless you have to write back to the file
+
+$filesize($filename);  //this obtains the number of bytes
+
+$somestring = fread($handle,$filesize);  //need the $filesize because the fread command need to know how far to read
+at the end of your code it is best practice to close the file
+fclose($handle);
+
+before reading a file it is recommended to check 
+```
+is_readable($filename);
+```
+to make sure the file exists and is readable 
+
+```feof($handle);``` checks if file pointer has reached the end of the file and returns a boolean
+
+before writing to a file it is recommended to check 
+```
+is_writable($filename);
+```
+or
+```
+is_writeable($filename);
+```
+to make sure data can be written to the file
+
+###HTML and CSS
+
+<p id="test">content</p>
+<img src="">
+
+**SHORTCUT**
+use HTML:5 then press tab to get the following
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+
+Verbs in the HTML cut and paste from (http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol)
+**GET**
+Requests a representation of the specified resource. Requests using GET should only retrieve data and should have no other effect. (This is also true of some other HTTP methods.)[1] The W3C has published guidance principles on this distinction, saying, "Web application design should be informed by the above principles, but also by the relevant limitations."[12] See safe methods below.
+**HEAD**
+Asks for the response identical to the one that would correspond to a GET request, but without the response body. This is useful for retrieving meta-information written in response headers, without having to transport the entire content.
+**POST**
+Requests that the server accept the entity enclosed in the request as a new subordinate of the web resource identified by the URI. The data POSTed might be, as examples, an annotation for existing resources; a message for a bulletin board, newsgroup, mailing list, or comment thread; a block of data that is the result of submitting a web form to a data-handling process; or an item to add to a database.[13]
+**PUT**
+Requests that the enclosed entity be stored under the supplied URI. If the URI refers to an already existing resource, it is modified; if the URI does not point to an existing resource, then the server can create the resource with that URI.[14]
+**DELETE**
+Deletes the specified resource.
+**TRACE**
+Echoes back the received request so that a client can see what (if any) changes or additions have been made by intermediate servers.
+**OPTIONS**
+Returns the HTTP methods that the server supports for the specified URL. This can be used to check the functionality of a web server by requesting '*' instead of a specific resource.
+**CONNECT**
+Converts the request connection to a transparent TCP/IP tunnel, usually to facilitate SSL-encrypted communication (HTTPS) through an unencrypted HTTP proxy.[15][16] See HTTP CONNECT Tunneling.
+**PATCH**
+Is used to apply partial modifications to a resource.[17]
+
+This will add an element that allows user to jump to top of page (or anywhere else) 
+<a href="#top">Go to the top of the page</a>
+
+You need to add the following id as the target location on the page.
+<a id="top"></a>
+
+
+####Forms
+put these two lines into a file named form.php
+
+<?php
+var_dump($_GET);
+var_dump($_POST);
+?>
+
+Form Inputs and Submitting
+So far, we have covered the basic structure of HTML forms, and a little bit about how they work. Now we will begin to cover form inputs and submission.
+
+Form Inputs
+Form inputs can be defined by using the HTML <input> element. The <input> element is a void element, since it doesn't have any inner content.
+
+Type Attribute
+There are many types of form inputs in HTML. Since most HTML inputs use the same HTML element, <input>, the browser needs a way to distinguish the input type. This is achieved by specifying a type attribute as part of the <input> element. The types we will be covering in this unit are:
+
+submit
+text
+password
+checkbox
+radio
+We will also be covering the textarea and select input types, which use unique HTML elements that will be discussed later in this unit.
+
+Name Attribute
+HTML inputs should also have a name attribute that describes what the input is. The name attribute for the input will appear as the key in the query string when the form is submitted.
+
+Id Attribute
+Additionally, an id attribute with the same value as the name attribute is often specified with the <input>. The id attribute is used for input labeling and also for easy access via JavaScript.
+
+Value Attribute
+Some input types, like submit, text, and email, can have an initial value set by using the value attribute.
+
+Placeholder Attribute
+Some input types, like text, password, email, and textarea, can have a text overlay that give information about the input that disappears once data is entered for the input. This text overlay is accomplished using the placeholder attribute. The placeholder attribute will not be shown if a value is set for the <input>.
+
+Note: The placeholder attribute is supported in Internet Explorer 10+, Firefox, Opera, Chrome, and Safari.
+
+Input Example
+Using all the attributes we just learned, here is a simple text input:
+
+```<input type="text" id="username" name="username" placeholder="Enter your username">```
+
+typical method
+
+    <label for="username">Username</label>
+    <input id="username" name="username" type="text" placeholder="username">
+
+alternate method for linking label to input
+    <label>Username: <input name="username" type ="text"></label>
+
+---
+
+    run this to setup a new site on your computer
+    1.  (in your mac) cd ~/vagrant-lamp/
+    2.  copy and paste the following into the command line (replacing the 'todo.dev' reference with the name of your new site)
+
+    ansible-playbook -i ansible/local_hosts ansible/local-site-create.yml -e "domain=todo.dev";
+    ansible-playbook ansible/site-create.yml -l vagrant -e "domain=todo.dev"
+    **check for the correct command line string in the vagrant-lamp README.md file.**
+navigate to folder under sites and mkdir public
+sudo subl /etc/hosts
+add another reference at the bottom of the file (see the todo.dev example)
+save and close
+create a Git repository
+---
+
+
+26 May 14
+
+###JavaScript
+
+Arduino - hardware; with microcontroller and inputs/outputs for sensors..can be programmed with JavaScript
+
+using !!true is used when casting to a boolean
+
+
+function generate_random_word() {
+    return strtolower(exec('sed `perl -e "print int rand(99999)"`"q;d" /usr/share/dict/words')) . PHP_EOL;
+}
+
+###iterating through arrays in JavaScript (new functionality that is NOT supported in older browsers)
+
+var names = ['Chico', 'Harpo', 'Groucho', 'Zeppo'];
+names.forEach(function (element, index, array){
+    //element is the name of the item
+    //index is the iterator
+    //array is the array itself
+    console.log ('The name at index ' + index + ' is ' + element);
+});
+
+could also implement as a named function like this:
+
+var names = ['Chico', 'Harpo', 'Groucho', 'Zeppo'];
+function ShowNames (element, index, array){
+    //element is the name of the item
+    //index is the iterator
+    //array is the array itself
+    console.log ('The name at index ' + index + ' is ' + element);
+};
+names.forEach(ShowNames);
+
+
+###PHP and HTML
+
+
+Superglobals
+PHP provides some built in variables for us that are visible in all scopes, anywhere in our applications. These variables are referred to as superglobals.
+
+Using Superglobals
+We can view the entire list, and learn more from the PHP documentation for superglobals. For this unit, we'll be learning about:
+
+$_SERVER — Server and execution environment information.
+$_REQUEST — HTTP Request variables.
+$_GET — HTTP GET variables.
+$_POST — HTTP POST variables.
+$_SESSION — Session variables.
+$_COOKIE — HTTP cookies.
+$_FILES — HTTP File Upload variable.
+
+$_SESSION
+PHP allows us to persist data across page loads using sessions. Sessions are stored on the server, and each session has a unique session id (SID) that we can use to get information out of the $_SESSION superglobal array.
+
+To start using a session, the session must first be initialized/retrieved using the session_start() function.
+
+To set and get data from the session, we use the supergloabal array $_SESSION.
+
+To destroy all of the data associated with the current session, we can use session_destroy(). This method does not remove all the data currently stored in $_SESSION. 
+
+```$_SESSION = array();```
+
+use this php function in your code to redirect back to the page.
+
+```
+header('Location: /todo_list.php');
+exit;
+```
+
+Brian Eno's Oblique Strategies
+
+Peter Hansen's TED Talk "Embrace The Shake"
+sacha @simpleswitchlabs.com
+simpleswitchlabs.com
+photoboop.com
+
+
+<?php can also be written <? using short tags
+
+instead of <?php echo ... you can use
+<?= ....
+{no space between the ? and =}
+
+https://xss-game.appspot.com
+use htmlspecialchars(string) to protect from users injecting code into input fields
+
+#always check user input before outputing...at least use htmlspecialchars(string)
+
+
+##JavaScript and the DOM
+
+document.getElementById()
+
+document.getElementsbyClassName()
+
+document.getElementsByTagName()
+
+listItems[i].style['color'] = 'blue';
+or
+listItems[i].style.color = 'blue';
+
+##common events
+
+click
+mousedown
+mouseup
+change
+keydown
+keyup
+focus
+blur
+submit
+
+e.preventDefault() ... this tells browser to not do what it normally does
+preventDefault is very useful for validation
+
+syntax for creating new object in JavaScript
+
+var car = {};
+
+this is the same as var car = new Object();
+
+
+var books = <?= json_encode($phpBooks, JSON_PRETTY_PRINT); ?>;
+
+check out the Canvas Object
+allows you to draw objects on screen
+
+##Working with Dates using moment.js
+
+first include the following line in your header
+
+<script src="/js/moment.js"></script>
+
+// get the current date/time with moment
+var now = moment();
+
+// getting calendar date strings
+console.log(now.calendar());
+
+// formatting dates
+console.log(now.format("dddd, MMMM Do YYYY, h:mm:ss a"));
+
+// date addition
+console.log(moment().add('days', 1).fromNow());
+console.log(moment().add('weeks', 1).fromNow());
+
+// date subtraction
+console.log(moment().subtract('days', 1).fromNow());
+console.log(moment().subtract('weeks', 1).fromNow());
+
+// get a specific date
+var codeup = moment("2-4-2014", "MM-DD-YYYY");
+console.log(codeup.fromNow());
+
+##JQuery
+
+typical syntax is 
+$('element or id or class').operation
+
+example
+$('h1').html(); //retrieve HTML from h1 elements
+$('#someid').html(); //retrieve HTML from an element with id='someid'
+$('.aclass').html(); //retrieve HTML from elements with class ='aclass'
+
+put information into the parentheses to push data to the element
+
+for example:
+$('#someid').html('change text to me'); //changes html for element with id='someid' to the text in the parentheses
+
+###Event Handlers in JQuery
+
+some events include:
+.click(function())
+.dblclick(function())
+.hover(enter function(), exit function())
+The .hover() event handler combines two other event handlers: mouseenter() and mouseleave().
+
+$('#someid').click(function(){do something}); 

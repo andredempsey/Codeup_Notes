@@ -743,3 +743,223 @@ some events include:
 The .hover() event handler combines two other event handlers: mouseenter() and mouseleave().
 
 $('#someid').click(function(){do something}); 
+
+##JQuery Selectors and Events
+
+sliding effects
+fading effects
+toggle effects
+
+using this to select the correct element
+
+
+##MySQL
+Launch program from command line:
+mysql
+mysql -u andre -p
+
+creating a user:
+CREATE USER 'codeup'@'localhost' IDENTIFIED BY 'password';
+
+GRANT ALL PRIVILEGES ON *.* TO 'codeup'@'localhost' WITH GRANT OPTION;
+
+Listing the databases:
+
+SHOW DATABASES;
+
+Creating a new database:
+
+CREATE DATABASE codeup_test;
+
+Deleting a database:
+DROP DATABASE codeup_test;
+
+Creating a table:
+
+CREATE TABLE table_name (column_name data_type(size), column_name data_type(size), ...);
+
+Process includes:
+
+CREATE database
+USE database
+CREATE table
+
+Example for create command
+
+CREATE TABLE quotes (
+    id INT NOT NULL AUTO_INCREMENT,
+    content VARCHAR(240) NOT NULL,
+    author VARCHAR(50) NOT NULL,
+    PRIMARY KEY (id)
+);
+
+Command to show the tables in a database:
+
+SHOW TABLES;
+
+
+Command to show details of a table:
+
+DESCRIBE quotes;
+
+Data Types:
+
+Storage Type    Name        Description
+Number          TINYINT     Numbers between 0 and 255 (unsigned) or -128 and 127 (signed)
+Number          BOOL, 
+                BOOLEAN     Synonym for TINYINT. true = 1, false = 0
+Number          INT         Whole numbers between -2147483648 and 2147483647 (unsigned).
+Number          DECIMAL     Store exact numbers, specifying the significant digits.
+Number          FLOAT       Stores floating point numbers.
+String          CHAR        Stores a specific number of characters from 0 to 255
+String          VARCHAR     Stores a varying number of characters from 0 to 65,535
+String          TEXT        Stores large amount of text data (more than 255 chars)
+String          ENUM        Allows strings from a list of permitted values.
+Date/Time       DATE        Date in 'YYYY-MM-DD' format
+Date/Time       DATETIME    Date/Time in 'YYYY-MM-DD HH:MM:SS' format.
+Date/Time       TIME        Time in 'HH:MM:SS' format.
+
+CREATE TABLE albums (
+    id INT NOT NULL AUTO_INCREMENT,
+    name VARCHAR(240) NOT NULL,
+    year int(4) NOT NULL,
+    artist VARCHAR(240) NOT NULL,
+    PRIMARY KEY (id)
+);
+
+'Michael Jackson', 'Thriller', 1982 
+'Eagles','Their Greatest Hits (1971–1975)', 1976    
+'Whitney Houston / Various artists', 'The Bodyguard', 1992  
+'Fleetwood Mac', 'Rumours', 1977    
+'AC/DC', 'Back in Black', 1980  
+'Pink Floyd', 'The Dark Side of the Moon', 1973 
+'Bee Gees / Various artists', 'Saturday Night Fever', 1977  
+'Shania Twain', 'Come On Over', 1997    
+'Led Zeppelin', 'Led Zeppelin IV', 1971 
+'Meat Loaf', 'Bat Out of Hell', 1977    
+
+INSERT INTO albums (artist, name, year) VALUES ('Michael Jackson', 'Thriller', 1982),
+('Eagles','Their Greatest Hits (1971–1975)', 1976),
+('Whitney Houston / Various artists', 'The Bodyguard', 1992),
+('Fleetwood Mac', 'Rumours', 1977),
+('AC/DC', 'Back in Black', 1980),
+('Pink Floyd', 'The Dark Side of the Moon', 1973),
+('Bee Gees / Various artists', 'Saturday Night Fever', 1977),
+('Shania Twain', 'Come On Over', 1997),
+('Led Zeppelin', 'Led Zeppelin IV', 1971),
+('Meat Loaf', 'Bat Out of Hell', 1977);
+
+UPDATE table SET column_name = value, column_namd = value WHERE conditional;
+
+
+Find all albums released in the before 1980
+SELECT FROM albums WHERE year < 1980;
+Find all albums released in 1977
+SELECT FROM albums WHERE year = 1977;
+Find all albums released after 2000
+SELECT FROM albums WHERE year > 2000;
+
+DELETE FROM albums WHERE id=7;
+
+Name:  Vagrant MySQL
+MySQL Host:  127.0.0.1
+Username: andre
+Password: password
+
+SSH Host 192.168.77.77
+this number was set up when the vagrant box was set up
+SSH User:  vagrant
+SSH Password:  vagrant
+SSH Port:  22
+
+ALTER TABLE quotes
+ADD UNIQUE (content);
+
+EXPLAIN keyword can help provide insight on what the DB is doing behind the scenes...may help you determine what action to take to speed up a query (i.e. add indexes)
+
+SHOW CREATE TABLE tablename;
+
+##PHP with MySQL
+
+PDO is a database abstraction layer (allows communication with multiply databases using a single API)
+PDO -  PHP Data Object (PDO)
+
+
+// Get new instance of PDO object
+$dbc = new PDO('mysql:host=127.0.0.1;dbname=database_name', 'USERNAME', 'PASSWORD');
+
+
+the DSN in the above example is mysql:host=127.0.0.1;dbname=database_name
+
+Example:
+
+// Get new instance of PDO object
+$dbc = new PDO('mysql:host=127.0.0.1;dbname=codeup_pdo_test_db', 'codeup', 'password');
+
+// Tell PDO to throw exceptions on error
+$dbc->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+// Create the query and assign to var
+$query = 'CREATE TABLE users (
+    id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    email VARCHAR(240) NOT NULL,
+    name VARCHAR(50) NOT NULL,
+    PRIMARY KEY (id)
+)';
+
+// Run query, if there are errors they will be thrown as PDOExceptions
+$dbc->exec($query);
+
+
+##retrieving data from MySQL using PHP
+
+$stmt = $dbc->query('SELECT id, name, email FROM users');
+
+Results Metadata
+The PDOStatement class provides a couple of methods that are useful for determining information about the results.
+
+$stmt->columnCount() — The number of columns in a result.
+$stmt->rowCount() — The number of rows in a result.
+For example, we can do the following:
+
+$stmt = $dbc->query('SELECT * FROM users');
+
+echo "Columns: " . $stmt->columnCount() . PHP_EOL;
+echo "Rows: " . $stmt->rowCount() . PHP_EOL;
+
+Fetching Row(s)
+The most common way to get our results from the PDOStatement instance is to use the fetch() method. By default, this function will return the current database row as an array and advance to the next row. By putting our call to $stmt->fetch() in the heading of a while statement we can iterate through all the results, like the following:
+
+$stmt = $dbc->query('SELECT * FROM users');
+
+echo "Columns: " . $stmt->columnCount() . PHP_EOL;
+while ($row = $stmt->fetch()) {
+    print_r($row);
+}
+
+Notice that for each database row, fetch() appears to have duplicated each value—even though columnCount() reports that there are only three columns—once with a numeric key and then again with an associative key. This is because we did not specify how we wanted fetch() to return each row. We can pass a parameter to fetch() instructing how our data returned. Some common values (taken from PHP.net) are:
+
+PDO::FETCH_ASSOC — returns an array indexed by column name as returned in your result set
+PDO::FETCH_NUM — returns an array indexed by column number as returned in your result set, starting at column 0
+PDO::FETCH_BOTH — (default) returns an array indexed by both column name and 0-indexed column number as returned in your result set
+Note! We are passing what are called "class constants" to fetch(). These are part of the PDO class itself, and not our $dbc instance, and identified by the :: operator.
+
+In order to see what effect each of these values has, we can try out the following code:
+$stmt = $dbc->query('SELECT * FROM users');
+
+print_r($stmt->fetch());
+print_r($stmt->fetch(PDO::FETCH_ASSOC));
+print_r($stmt->fetch(PDO::FETCH_NUM));
+print_r($stmt->fetch(PDO::FETCH_BOTH));
+
+<? while($row=$stmt->fetch(PDO::FETCH_ASSOC)) : ?>
+    
+
+
+<? endwhile;?>
+
+
+#always use bound variables when getting input from a user!!!
+
+
+
